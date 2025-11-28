@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Sabores del Valle",
+    "slug": "sabores-del-valle",
+    "version": "1.0.0",
+
+    "icon": "./assets/images/sdv_logo.png",
+
+    "splash": {
+      "image": "./assets/images/sdv_logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0a5c0a"
+    },
+
+    "assetBundlePatterns": ["**/*"],
+
+    "ios": {
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSCameraUsageDescription": "La app necesita acceder a la cámara.",
+        "NSLocationWhenInUseUsageDescription": "La app necesita tu ubicación."
+      }
+    },
+
+    "android": {
+      "versionCode": 1,
+      "permissions": ["CAMERA", "ACCESS_FINE_LOCATION"],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/corn_background.png",
+        "backgroundColor": "#0a5c0a"
+      }
+    },
+
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+
+    "plugins": ["expo-sqlite"]
+  }
+}
