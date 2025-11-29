@@ -71,16 +71,10 @@ export default function SelectBox({ data, onChange, placeholder, defaultValue }:
 
 const styles = StyleSheet.create({
   wrapper: { position: "relative", width: "100%", marginTop: 20 },
-  button: {
-    paddingVertical: 24, justifyContent: "space-between", backgroundColor: "rgba(0,0,0,0.05)",
-    flexDirection: "row", alignItems: "center", paddingHorizontal: 15, borderRadius: 8,
-  },
+  button: { paddingVertical: 24, justifyContent: "space-between", backgroundColor: "rgba(0,0,0,0.05)", flexDirection: "row", alignItems: "center", paddingHorizontal: 15, borderRadius: 8 },
   text: { fontSize: 12, opacity: 0.8 },
   dropdownOverlay: { position: "absolute", top: "100%", left: 0, right: 0, zIndex: 1000 },
-  options: {
-    backgroundColor: "white", width: "100%", padding: 6, borderRadius: 6,
-    elevation: 5, shadowColor: "#000", shadowOpacity: 0.15, shadowRadius: 4,
-  },
+  options: { backgroundColor: "white", width: "100%", padding: 6, borderRadius: 6, elevation: 5, shadowColor: "#000" },
   optionItem: { justifyContent: "center", padding: 20 },
   optionText: { fontSize: 12, color: "#333"},
   optionSelected: { backgroundColor: "rgba(123,160,91,0.1)", borderRadius: 6 },

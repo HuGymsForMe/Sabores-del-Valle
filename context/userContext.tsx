@@ -29,7 +29,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = () => {
     setIsLogged(false);
-    // No uses useRouter aquí, en su lugar pasa la función de navegación desde el componente
   };
 
   return (

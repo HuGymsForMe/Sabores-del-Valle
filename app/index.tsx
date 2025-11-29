@@ -2,7 +2,7 @@ import { useAuth } from "@/context/userContext";
 import { Entypo } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Alert, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, ImageBackground, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import ButtonApp from "@/components/ButtonApp";
 import InputApp from "@/components/InputApp";
@@ -27,9 +27,9 @@ export default function HomeScreen() {
         style={styles.background}
       >
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
+        style={styles.keyboardAvoidingView}
+        behavior="height"
+        keyboardVerticalOffset={0}
       >
 
         <ScrollView
@@ -75,48 +75,12 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
+  background: { flex: 1},
+  keyboardAvoidingView: { flex: 1 },
+  container: { alignItems: "center", justifyContent: "space-evenly", flexGrow: 1, paddingHorizontal: 20, paddingVertical: 40, backgroundColor: "rgba(255, 255, 255, 0.8)",
   },
-  container: {
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    flexGrow: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 40,
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
-  },
-
-  blockWhite: {
-    backgroundColor: "#ffffff",
-    padding: 24,
-    width: "85%",
-    maxWidth: 380,
-    borderRadius: 12,
-    gap: 10,
-    shadowColor: "#888",
-    elevation: 3,
-  },
-
-  blockUser: {
-    alignItems: "center",
-    marginBottom: 50,
-  },
-
-  userIconWrapper: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "#E8FFFA",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-
-  titleLogin: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: "#222",
-    letterSpacing: 0.5,
-  },
+  blockWhite: { backgroundColor: "#ffffff", padding: 24, width: "85%", maxWidth: 380, borderRadius: 12, gap: 10, shadowColor: "#888", elevation: 3 },
+  blockUser: { alignItems: "center", marginBottom: 50 },
+  userIconWrapper: { width: 80, height: 80, borderRadius: 40, backgroundColor: "#E8FFFA", justifyContent: "center", alignItems: "center", marginBottom: 10 },
+  titleLogin: { fontSize: 24, fontWeight: "700", color: "#222", letterSpacing: 0.5 },
 });

@@ -1,8 +1,8 @@
+import { getPedidosImporteCobrado, PedidoCargaTrabajoUI, updateEstadoPedido } from "@/app/database";
 import ButtonApp from "@/components/ButtonApp";
 import InputApp from "@/components/InputApp";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { getPedidosImporteCobrado, PedidoCargaTrabajoUI, updateEstadoPedido } from "../database";
 
 import ToastApp from "@/components/ToastApp";
 import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";

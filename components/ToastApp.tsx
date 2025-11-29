@@ -10,13 +10,7 @@ interface ToastAppProps {
   duration?: number;
 }
 
-export default function ToastApp({
-  value = "Operación completada",
-  extraStyle = {},
-  status = "info",
-  visible = false,
-  duration = 3000,
-}: ToastAppProps) {
+export default function ToastApp({ value, extraStyle, status = "info", visible = false, duration = 3000 }: ToastAppProps) {
   const [show, setShow] = useState(visible);
   const fadeAnim = useState(new Animated.Value(0))[0];
 
@@ -73,25 +67,6 @@ export default function ToastApp({
 }
 
 const styles = StyleSheet.create({
-  toast: {
-    position: "absolute",
-    top: 20,
-    right: 20,
-    alignContent: "center",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  text: {
-    color: "#FFFFFF",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
+  toast: { position: "absolute", top: 20, right: 20, alignContent: "center", flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 16, paddingHorizontal: 24, borderRadius: 10, shadowColor: "#000", elevation: 3 },
+  text: { color: "#FFFFFF", fontWeight: "bold", textAlign: "center" },
 });

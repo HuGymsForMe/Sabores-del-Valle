@@ -77,11 +77,11 @@ export default function CargaTrabajoScreen() {
 
       <BannerCargaTrabajo enReparto={resumen.enReparto} entregados={resumen.entregados} conIncidencias={resumen.conIncidencias}  />
 
-      <View style={{ width: "95%", marginTop: 20 }}>
-        <Text style={{ fontSize: 18 }}>Fecha de pedidos:</Text>
+      <View style={styles.blockTextDate}>
+        <Text style={styles.blockTextDateText}>Fecha de pedidos:</Text>
       </View>
 
-      <Pressable onPress={toggleDatePicker} style={{ width: "95%" }}>
+      <Pressable onPress={toggleDatePicker} style={styles.pressDate}>
         <InputApp
           placeholder="Fecha de carga de trabajo..."
           value={formattedDate}
@@ -109,7 +109,7 @@ export default function CargaTrabajoScreen() {
         </View>
       ) : (
         <ScrollView
-          style={{ width: "95%" }}
+          style={styles.scrollView}
           contentContainerStyle={styles.scrollContainer}
         >
           {pedidos.map((pedido, index) => (
@@ -122,22 +122,12 @@ export default function CargaTrabajoScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    width: "100%",
-  },
-  text: {
-    fontSize: 18,
-    marginTop: 20,
-    color: "#69daa2ff",
-  },
-  sinPedidosContainer: {
-    alignItems: "center",
-    marginTop: 30,
-  },
-  scrollContainer: {
-    paddingHorizontal: 0,
-    paddingVertical: 10,
-  },
+  container: { flex: 1, alignItems: "center", width: "100%" },
+  blockTextDate: { width: "95%", marginTop: 20 },
+  blockTextDateText: { fontSize: 18 },
+  pressDate: { width: "95%" },
+  scrollView: { width: "95%" },
+  text: { fontSize: 18, marginTop: 20, color: "#69daa2ff" },
+  sinPedidosContainer: { alignItems: "center", marginTop: 30 },
+  scrollContainer: { paddingHorizontal: 0, paddingVertical: 10 },
 });

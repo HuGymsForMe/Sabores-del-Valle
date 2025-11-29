@@ -4,9 +4,9 @@ import { StyleSheet, View } from "react-native";
 import ButtonApp from "@/components/ButtonApp";
 import LogoSaboresDelValle from "@/components/logos/LogoSaboresDelValle";
 
+import { subiendoPedidos } from "@/app/database";
 import { useLoading } from "@/context/loaderContext";
 import { useAuth } from "@/context/userContext";
-import { subiendoPedidos } from "./database";
 
 // * PANTALLA DEL MENÚ PRINCIPAL * //
 export default function MenuScreen() {
@@ -50,7 +50,7 @@ export default function MenuScreen() {
       </View>
       <View style={styles.containerButtons}>
         <ButtonApp
-          title="Lanzar sincro 🛜"
+          title="Gestionar pedidos 🛜"
           onPress={handleSincro}
           extraStyle={{ width: '100%', margin: 8, paddingVertical: 20 }}
         />
@@ -67,7 +67,8 @@ export default function MenuScreen() {
         <ButtonApp
           title="Cerrar sesión"
           onPress={handleLogout}
-          extraStyle={{ width: '100%', margin: 8, paddingVertical: 20 }}
+          extraStyle={{ width: '100%', margin: 8, paddingVertical: 20, backgroundColor: '#ffb8b9ff' }}
+          pressedStyle={{ backgroundColor: '#ff9a9bff' }}
         />
       </View>
     </View>

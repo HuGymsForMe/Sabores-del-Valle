@@ -1,10 +1,10 @@
+import { CierreDeCajaUI, getImporteTotalDiario, getImporteTotalDiarioPorEstadoCaja } from "@/app/database";
 import BannerCargaTrabajo from "@/components/BannerCargadeTrabajo";
 import InfoApp from "@/components/InfoApp";
 import LogoSaboresDelValle from "@/components/logos/LogoSaboresDelValle";
 import { useLoading } from "@/context/loaderContext";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { CierreDeCajaUI, getImporteTotalDiario, getImporteTotalDiarioPorEstadoCaja } from "./database";
 
 // * PANTALLA DE CIERRE DE CAJA * //
 export default function CierreCajaScreen() {

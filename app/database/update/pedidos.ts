@@ -1,4 +1,4 @@
-import { getDB } from "../db";
+import { getDB } from "@/app/database/db";
 
 export async function updateIncidenciaPedido(
   entradaDocumento: number,

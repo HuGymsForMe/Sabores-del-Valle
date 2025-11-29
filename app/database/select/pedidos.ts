@@ -1,5 +1,5 @@
-import { getDB } from "../db";
-import { CierreDeCajaUI, PedidoCargaTrabajoUI, PedidoDetallesPedidoUI } from "../types";
+import { getDB } from "@/app/database/db";
+import { CierreDeCajaUI, PedidoCargaTrabajoUI, PedidoDetallesPedidoUI } from "@/app/database/types";
 
 const estadoDocumentoMap: Record<number, string> = {
   1: "PENDIENTE",

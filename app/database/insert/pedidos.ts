@@ -1,5 +1,5 @@
+import { getDB } from "@/app/database/db";
 import { pedidosData } from "@/app/database/pedidos";
-import { getDB } from "../db";
 
 export async function insertPedido(pedido: any) {
   const db = await getDB();

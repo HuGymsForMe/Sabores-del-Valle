@@ -17,14 +17,7 @@ const incidenciaText: Record<number, string> = {
   4: "Dirección errónea",
 };
 
-export default function PedidoLineaItem({
-  descripcion,
-  unidades,
-  importe,
-  estadoLinea,
-  incidenciaLinea,
-  onPress,
-}: PedidoLineaItemProps) {
+export default function PedidoLineaItem({ descripcion, unidades, importe, estadoLinea, incidenciaLinea, onPress }: PedidoLineaItemProps) {
 
   let backgroundColor = "#F8F8F4";
   let estadoLabel = "Pendiente";
@@ -64,34 +57,10 @@ export default function PedidoLineaItem({
 }
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderRadius: 6,
-    marginBottom: 10,
-  },
-  colLeft: {
-    flex: 4,
-  },
-  descripcion: {
-    fontSize: 12
-  },
-  estado: {
-    fontSize: 10,
-    marginTop: 4,
-    fontWeight: "500",
-  },
-  unidades: {
-    flex: 1,
-    fontSize: 12,
-    textAlign: "center",
-  },
-  importe: {
-    flex: 1,
-    fontSize: 14,
-    textAlign: "right",
-    fontWeight: "bold",
-  },
+  row: { flexDirection: "row", alignItems: "center", paddingVertical: 16, paddingHorizontal: 20, borderRadius: 6, marginBottom: 10 },
+  colLeft: { flex: 4 },
+  descripcion: { fontSize: 12 },
+  estado: { fontSize: 10, marginTop: 4, fontWeight: "500" },
+  unidades: { flex: 1, fontSize: 12, textAlign: "center" },
+  importe: { flex: 1, fontSize: 14, textAlign: "right", fontWeight: "bold" },
 });

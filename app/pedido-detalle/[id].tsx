@@ -125,7 +125,7 @@ export default function PedidoDetalleScreen() {
               />
             ))
           ) : (
-            <Text style={{ textAlign: "center", marginTop: 20, color: "#777" }}>
+            <Text style={styles.withoutLinesText}>
               No hay líneas para este pedido
             </Text>
           )}
@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
   colUnidades: { flex: 1, alignItems: "center" },
   colImporte: { flex: 1, alignItems: "flex-end" },
   headerText: { fontWeight: "bold", color: "#7BA05B", fontSize: 12 },
+  withoutLinesText: { textAlign: "center", marginTop: 20, color: "#777" },
   buttonContainer: { flexDirection: "row", justifyContent: "space-between" },
   modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.6)", justifyContent: "center", alignItems: "center"},
   modalHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10 },
@@ -240,5 +241,5 @@ const styles = StyleSheet.create({
   modalCharacteristics: { marginVertical: 5, fontSize: 12 },
   modalFooter: { flexDirection: "row", justifyContent: "space-between", gap: 10, marginTop: "auto" },
   footerButton: { flex: 1, paddingVertical: 14, borderRadius: 6 },
-  footerButtonText: { color: "#fff", textAlign: "center", fontWeight: "bold", fontSize: 12 },
+  footerButtonText: { color: "#fff", textAlign: "center", fontWeight: "bold", fontSize: 11 },
 });

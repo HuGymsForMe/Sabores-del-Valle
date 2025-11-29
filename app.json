@@ -25,7 +25,6 @@
 
     "android": {
       "softwareKeyboardLayoutMode": "resize",
-      "screenOrientation": "portrait",
       "versionCode": 1,
       "permissions": ["CAMERA", "ACCESS_FINE_LOCATION"],
       "adaptiveIcon": {
