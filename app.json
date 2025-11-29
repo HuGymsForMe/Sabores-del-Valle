@@ -3,6 +3,7 @@
     "name": "Sabores del Valle",
     "slug": "sabores-del-valle",
     "version": "1.0.0",
+    "orientation": "portrait",
 
     "icon": "./assets/images/sdv_logo.png",
 
@@ -23,6 +24,8 @@
     },
 
     "android": {
+      "softwareKeyboardLayoutMode": "resize",
+      "screenOrientation": "portrait",
       "versionCode": 1,
       "permissions": ["CAMERA", "ACCESS_FINE_LOCATION"],
       "adaptiveIcon": {
