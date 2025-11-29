@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 interface AuthContextType {
   isLogged: boolean;
   login: (usuario: string, password: string) => boolean;
+  logout: () => void;
 }
 
 export const UserContext = createContext<AuthContextType | null>(null);
@@ -26,8 +27,13 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     return false;
   };
 
+  const logout = () => {
+    setIsLogged(false);
+    // No uses useRouter aquí, en su lugar pasa la función de navegación desde el componente
+  };
+
   return (
-    <UserContext.Provider value={{ isLogged, login }}>
+    <UserContext.Provider value={{ isLogged, login, logout }}>
       {children}
     </UserContext.Provider>
   );
