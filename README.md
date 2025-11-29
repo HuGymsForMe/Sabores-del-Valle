@@ -1,15 +1,15 @@
 <div align="center">
-    <img src="./assets/images/sdv_logo.png" alt="Logo Sabores del Valle" width="15%" style="border-radius: 100%;" />
+    <img src="./assets/images/sdv_logo_circle.png" alt="Logo Sabores del Valle" width="15%" />
     <h1>🍝 Sabores del Valle 🍗</h1>
 </div>
 
 <br>
 <div align="center">
-    <img src="./assets/images/pedidos_interfaz.jpeg" alt="Vista del menú principal" width="40%" style="border-radius: 15px" />
+    <img src="./assets/images/pedidos_interfaz.jpeg" alt="Vista del menú principal" width="40%" />
 </div>
 <br>
 
-**Gestión de pedidos y caja para restaurantes directamente en tu dispositivo.**
+**Gestión de pedidos y caja para tiendas (e-commerce) directamente en tu dispositivo.**
 
 Sabores del Valle es una aplicación móvil diseñada para facilitar la gestión de pedidos, seguimiento de entregas y cierre de caja de forma rápida y eficiente.
 
@@ -22,7 +22,7 @@ Sabores del Valle es una aplicación móvil diseñada para facilitar la gestión
 
 <br>
 <div align="center">
-    <img src="./assets/images/pantalla_carga.jpeg" alt="Pantalla de carga de trabajo" width="40%" style="border-radius: 15px" />
+    <img src="./assets/images/pantalla_carga.jpeg" alt="Pantalla de carga de trabajo" width="40%" />
 </div>
 <br>
 
@@ -45,8 +45,8 @@ La versión actual 1.0.1 de **Sabores del Valle** está disponible **solo para A
 
 <br>
 <div align="center">
-    <img src="./assets/images/cierre_de_caja.jpeg" alt="Pantalla de cierre de caja" width="40%" style="border-radius: 15px" />
+    <img src="./assets/images/cierre_de_caja.jpeg" alt="Pantalla de cierre de caja" width="40%" />
 </div>
 <br>
 
-**¡Gestiona tu restaurante desde la palma de tu mano con Sabores del Valle!**
+**¡Gestiona tu tienda desde la palma de tu mano con Sabores del Valle!**
