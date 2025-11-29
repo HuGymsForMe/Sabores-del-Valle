@@ -29,6 +29,7 @@ export default function InputApp({
     <View style={[styles.inputContainer, extraStyle]}>
       <TextInput
         placeholder={placeholder}
+        placeholderTextColor="#8aa6a2"
         value={value}
         onChangeText={onChangeText}
         editable={editable}
@@ -36,7 +37,7 @@ export default function InputApp({
         style={[
           styles.inputText,
           multiline && styles.multiline,
-          !editable && { backgroundColor: "#f5f5f5" },
+          !editable && { backgroundColor: "#f1f1f1" },
         ]}
         multiline={multiline}
       />
@@ -46,10 +47,12 @@ export default function InputApp({
           onPress={() => setShowPassword(!showPassword)}
           style={styles.iconContainer}
         >
-          <AntDesign name={showPassword ? "eye" : "eye-invisible"}
+          <AntDesign
+            name={showPassword ? "eye" : "eye-invisible"}
             size={24}
-            color="#666"
-            style={{ marginBottom: 8 }} />
+            color="#13c2ac"
+            style={{ marginBottom: 12 }}
+          />
         </Pressable>
       )}
     </View>
@@ -63,25 +66,31 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputText: {
-    height: 44,
-    borderColor: "gray",
-    borderWidth: 1,
-    paddingHorizontal: 10,
+    height: 50,
+    borderWidth: 1.5,
+    paddingHorizontal: 12,
     backgroundColor: "#fff",
-    borderRadius: 4,
-    marginBottom: 10,
-    paddingRight: 35,
-    fontSize: 18
+    borderColor: "#13c2ac",
+    borderRadius: 10,
+    marginBottom: 14,
+    paddingRight: 45,
+    fontSize: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 2,
+    elevation: 2,
   },
   iconContainer: {
     position: "absolute",
-    right: 10,
+    right: 12,
     height: "100%",
     justifyContent: "center",
   },
   multiline: {
     height: 120,
-    paddingTop: 10,
-    paddingRight: 40,
+    paddingTop: 12,
+    paddingRight: 45,
+    backgroundColor: "#fbfbfb",
   },
 });

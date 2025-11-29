@@ -8,22 +8,20 @@ interface PedidoExternoProps {
   calle?: string;
   descripcion?: string;
   importe?: string;
-  tipoEntrega?: string;
   estado?: string;
 }
 
 export default function PedidoExterno({
-  id = 1,
-  cliente = "Cliente Perico de los Palotes",
-  calle = "Calle de la Piruleta, 25",
-  descripcion = "Descripción del pedido",
-  importe = "125.35€",
-  tipoEntrega = "Entrega en domicilio",
-  estado = "PENDIENTE",
+  id,
+  cliente,
+  calle,
+  descripcion,
+  importe,
+  estado
 }: PedidoExternoProps) {
   const router = useRouter();
 
-  const estadoUpper = estado.toUpperCase();
+  const estadoUpper = estado ? estado.toUpperCase() : "";
 
   const isCompletado = estadoUpper === "COMPLETADO";
   const isIncidencia = estadoUpper === "CON INCIDENCIA";
@@ -60,11 +58,9 @@ export default function PedidoExterno({
 
       <View style={[styles.row, styles.spaceBetween]}>
         <Text style={styles.text}>{descripcion}</Text>
-        <Text style={styles.boldText}>Importe: {importe}</Text>
       </View>
 
       <View style={[styles.row, styles.spaceBetween]}>
-        <Text style={styles.text}>{tipoEntrega}</Text>
         <Text
           style={[
             styles.text,
@@ -75,11 +71,11 @@ export default function PedidoExterno({
         </Text>
       </View>
 
-      <View style={styles.row}>
-        <Text style={[styles.estado]}>
-          Estado: {estado}
-        </Text>
+      <View style={[styles.row, styles.importeRow]}>
+        <Text style={styles.estado}>Estado: {estado}</Text>
+        <Text style={styles.importeText}>{importe}</Text>
       </View>
+
     </Pressable>
   );
 }
@@ -136,5 +132,16 @@ const styles = StyleSheet.create({
   },
   textNoCobrado: {
     color: "#B55E00",
+  },
+    importeRow: {
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+  },
+
+  importeText: {
+    fontSize: 18,   
+    fontWeight: "700",
+    color: "#000",
+    alignSelf: "flex-end",
   },
 });

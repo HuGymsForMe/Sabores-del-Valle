@@ -76,16 +76,16 @@ const styles = StyleSheet.create({
     flex: 4,
   },
   descripcion: {
-    fontSize: 14,
+    fontSize: 12
   },
   estado: {
-    fontSize: 12,
+    fontSize: 10,
     marginTop: 4,
     fontWeight: "500",
   },
   unidades: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 12,
     textAlign: "center",
   },
   importe: {

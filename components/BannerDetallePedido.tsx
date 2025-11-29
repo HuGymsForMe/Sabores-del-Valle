@@ -36,8 +36,8 @@ export default function BannerDetallePedido({ cliente, direccion }: BannerDetall
 const styles = StyleSheet.create({
     blockIcons: {
         flexDirection: "row",
-        justifyContent: "space-between",
-        paddingHorizontal: 40,
+        justifyContent: "space-evenly",
+        paddingHorizontal: 20,
         alignItems: "center",
         width: "100%",
         backgroundColor: "#90e1ff",
@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     blockText:{
-        alignItems: "flex-start",
+        alignItems: "flex-start",    
+        flex: 1,
+        flexWrap: "wrap",
     },
     blockIcon:{
         alignItems: "center",
