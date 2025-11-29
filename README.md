@@ -1,50 +1,52 @@
-# Welcome to your Expo app 👋
+<div align="center">
+    <img src="./assets/images/sdv_logo.png" alt="Logo Sabores del Valle" width="35%" />
+    <h1>🍝 Sabores del Valle 🍗</h1>
+</div>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<br>
+<div align="center">
+    <img src="./assets/images/pedidos_interfaz.jpeg" alt="Vista del menú principal" width="70%" />
+</div>
+<br>
 
-## Get started
+**Gestión de pedidos y caja para restaurantes directamente en tu dispositivo.**
 
-1. Install dependencies
+Sabores del Valle es una aplicación móvil diseñada para facilitar la gestión de pedidos, seguimiento de entregas y cierre de caja de forma rápida y eficiente.
 
-   ```bash
-   npm install
-   ```
+## ✨ Características principales
+- 🍽️ Gestión de pedidos en tiempo real.
+- 🛒 Seguimiento de pedidos en reparto y entregados.
+- 💰 Cierre de caja diario con desglose por métodos de pago.
+- 📊 Estadísticas y resumen de pedidos por estado.
+- 🗓️ Filtrado de pedidos por fecha y control de incidencias.
 
-2. Start the app
+<br>
+<div align="center">
+    <img src="./assets/images/pantalla_carga.jpeg" alt="Pantalla de carga de trabajo" width="70%" />
+</div>
+<br>
 
-   ```bash
-   npx expo start
-   ```
+## 💻 Tecnologías utilizadas
+- 🟦 **React Native / TypeScript / Expo** (Para construir la aplicación móvil)
+- ⚛️ **Expo Router** (Para la navegación entre pantallas)
+- 🗄️ **SQLite** (Para almacenamiento local de pedidos y usuarios)
+- 🎨 **CSS** (Para estilos y diseño de UI)
 
-In the output, you'll find options to open the app in a
+## 🌐 Repositorio del proyecto
+Puedes consultar el código fuente y seguir su desarrollo aquí:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+👉 **[Ver repositorio en GitHub](https://github.com/HuGymsForMe/Sabores-del-Valle)**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📱 Descarga de la APK
 
-## Get a fresh project
+La versión actual 1.0.1 de **Sabores del Valle** está disponible **solo para Android**, tanto para **móviles como para tablets**.  
 
-When you're ready, run:
+👉 **[Descargar APK de la versión actual](https://expo.dev/accounts/hugymsforme/projects/sabores-del-valle/builds/13ec2524-00ab-4562-89ee-68fa9f67de21)**  
 
-```bash
-npm run reset-project
-```
+<br>
+<div align="center">
+    <img src="./assets/images/cierre_de_caja.jpeg" alt="Pantalla de cierre de caja" width="70%" />
+</div>
+<br>
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+**¡Gestiona tu restaurante desde la palma de tu mano con Sabores del Valle!**
