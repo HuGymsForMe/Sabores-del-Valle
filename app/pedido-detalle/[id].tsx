@@ -94,7 +94,7 @@ export default function PedidoDetalleScreen() {
 
       <PedidoDetalleInfo
         tipoEntrega={lineas[0]?.cliente ?? "Cliente desconocido"}
-        codigo={lineas[0]?.codigoPedido ?? "—"}
+        codigo={lineas[0]?.entradaDocumento ?? "—"}
       />
 
       <View style={styles.listContainer}>
@@ -224,93 +224,21 @@ export default function PedidoDetalleScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
-
   listContainer: { flex: 1, paddingHorizontal: 24 },
-
-  tableHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 8,
-    paddingHorizontal: 12,
-  },
-
+  tableHeader: { flexDirection: "row", justifyContent: "space-between", marginBottom: 8, paddingHorizontal: 12},
   colDescripcion: { flex: 4 },
   colUnidades: { flex: 1, alignItems: "center" },
   colImporte: { flex: 1, alignItems: "flex-end" },
-
-  headerText: {
-    fontWeight: "bold",
-    color: "#7BA05B",
-  },
-
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.6)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  modalHeader: {
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: 10,
-},
-
-closeIcon: {
-  padding: 6,
-},
-
-closeIconText: {
-  fontSize: 24,
-  fontWeight: "bold",
-  color: "#F76548",
-},
-
-
-  modalContent: {
-  backgroundColor: "#fff",
-  borderRadius: 10,
-  width: "90%",
-  minHeight: "70%",
-  padding: 20,
-},
-
-
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#7BA05B",
-  },
-
-  modalCharacteristics: {
-    marginVertical: 5,
-    fontSize: 16,
-  },
-
-  modalFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 10,
-    marginTop: "auto",
-  },
-
-
-  footerButton: {
-    flex: 1,
-    paddingVertical: 14,
-    borderRadius: 6,
-  },
-
-  footerButtonText: {
-    color: "#fff",
-    textAlign: "center",
-    fontWeight: "bold",
-  },
+  headerText: { fontWeight: "bold", color: "#7BA05B", fontSize: 12 },
+  buttonContainer: { flexDirection: "row", justifyContent: "space-between" },
+  modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.6)", justifyContent: "center", alignItems: "center"},
+  modalHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10 },
+  closeIcon: { padding: 6 },
+  closeIconText: { fontSize: 24, fontWeight: "bold", color: "#F76548" },
+  modalContent: { backgroundColor: "#fff", borderRadius: 10, width: "90%", minHeight: "70%", padding: 20 },
+  modalTitle: { fontSize: 16, fontWeight: "bold", marginBottom: 10, color: "#7BA05B" },
+  modalCharacteristics: { marginVertical: 5, fontSize: 12 },
+  modalFooter: { flexDirection: "row", justifyContent: "space-between", gap: 10, marginTop: "auto" },
+  footerButton: { flex: 1, paddingVertical: 14, borderRadius: 6 },
+  footerButtonText: { color: "#fff", textAlign: "center", fontWeight: "bold", fontSize: 12 },
 });

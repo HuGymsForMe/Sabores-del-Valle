@@ -1,12 +1,15 @@
 import BannerCargaTrabajo from "@/components/BannerCargadeTrabajo";
 import InfoApp from "@/components/InfoApp";
 import LogoSaboresDelValle from "@/components/logos/LogoSaboresDelValle";
+import { useLoading } from "@/context/loaderContext";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { CierreDeCajaUI, getImporteTotalDiario, getImporteTotalDiarioPorEstadoCaja } from "./database";
 
 // * PANTALLA DE CIERRE DE CAJA * //
 export default function CierreCajaScreen() {
+
+  const { setLoading, setLoadingText } = useLoading();
 
     const [prices, setPrices] = useState<CierreDeCajaUI>({
         importeTotalDiario: 0,
@@ -19,25 +22,25 @@ export default function CierreCajaScreen() {
       conIncidencias: 0
     });
 
-    // * Recogiendo los pedidos de la fecha indicada por el usuario * //
-      const fetchPedidos = async () => {
-        try {
-          const data = await getImporteTotalDiarioPorEstadoCaja();
-        } catch (err) {
-          console.error("❌ Error al obtener pedidos:", err);
-        } finally {
-        }
-      };
-
     useEffect(() => {
-        (async () => {
-            const data = await getImporteTotalDiario();
-            const resumenCaja = await getImporteTotalDiarioPorEstadoCaja();
-            setPrices(data);
-            setResumen(resumenCaja);
-            fetchPedidos();
-        })();
-    }, []);
+  (async () => {
+    try {
+      setLoadingText("Calculando cierre de caja...");
+      setLoading(true);
+
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      const data = await getImporteTotalDiario();
+      const resumenCaja = await getImporteTotalDiarioPorEstadoCaja();
+      
+      setPrices(data);
+      setResumen(resumenCaja);
+    } catch (err) {
+      console.error("❌ Error al obtener cierre de caja:", err);
+    } finally {
+      setLoading(false);
+    }
+  })();
+}, []);
 
 
     return (<ScrollView style={{flex: 1}} contentContainerStyle={styles.container}>
@@ -65,7 +68,7 @@ export default function CierreCajaScreen() {
         </View>
 
         <View style={styles.containerMetodosDesgloseIndividual}>
-          <Text style={styles.containerMetodosDesgloseIndividualText}>Tarjetas:</Text>
+          <Text style={styles.containerMetodosDesgloseIndividualText}>Tarjeta:</Text>
           <Text style={styles.containerMetodosDesgloseIndividualText}>{prices.importeTotalTarjeta.toFixed(2)}€</Text>
         </View>
 

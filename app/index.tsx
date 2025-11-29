@@ -2,7 +2,7 @@ import { useAuth } from "@/context/userContext";
 import { Entypo } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import ButtonApp from "@/components/ButtonApp";
 import InputApp from "@/components/InputApp";
@@ -21,6 +21,11 @@ export default function HomeScreen() {
   };
 
   return (
+    <ImageBackground
+        source={require("@/assets/images/wallpaper-campo.jpg")}
+        resizeMode="cover"
+        style={styles.background}
+      >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -65,16 +70,21 @@ export default function HomeScreen() {
 
         </ScrollView>
       </KeyboardAvoidingView>
+      </ ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+  },
   container: {
     alignItems: "center",
     justifyContent: "space-evenly",
     flexGrow: 1,
     paddingHorizontal: 20,
     paddingVertical: 40,
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
   },
 
   blockWhite: {

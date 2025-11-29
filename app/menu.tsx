@@ -1,18 +1,19 @@
-import { seedIfEmpty } from "@/app/database";
 import { useRouter } from "expo-router";
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import ButtonApp from "@/components/ButtonApp";
 import LogoSaboresDelValle from "@/components/logos/LogoSaboresDelValle";
-import ToastApp from "@/components/ToastApp";
+
+import { useLoading } from "@/context/loaderContext";
+import { useAuth } from "@/context/userContext";
+import { subiendoPedidos } from "./database";
 
 // * PANTALLA DEL MENÚ PRINCIPAL * //
 export default function MenuScreen() {
 
   const router = useRouter();
-  const [showToast, setShowToast] = useState<boolean>(false);
-  const [textToast, setTextToast] = useState<string>("");
+  const { setLoading, setLoadingText } = useLoading();
+  const { logout } = useAuth();
 
   // * Enlace a la carga de trabajo * //
   const handleCargaTrabajo = () => {
@@ -27,16 +28,20 @@ export default function MenuScreen() {
   };
 
   // TODO -> Recoger los pedidos de la API y enviar los ya completos
-  const handleSincro = () => {
-    setTextToast("Recogiendo pedidos del ERP...")
-    setShowToast(true);
-    seedIfEmpty();
-    setTimeout(() => setShowToast(false), 3500);
-
-    // setTextToast("Subiendo pedidos completados al ERP...");
-    // setShowToast(true);
-    // setTimeout(() => setShowToast(false), 3500);
+  const handleSincro = async () => {
+    setLoadingText("Recogiendo datos del ERP...");
+    setLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await subiendoPedidos();
+    setLoading(false);
   };
+
+  // * Cerrar sesión * //
+  const handleLogout = () => {
+    logout();
+    router.replace("/");
+  };
+
 
   return (
     <View style={styles.container}>
@@ -45,26 +50,26 @@ export default function MenuScreen() {
       </View>
       <View style={styles.containerButtons}>
         <ButtonApp
+          title="Lanzar sincro 🛜"
+          onPress={handleSincro}
+          extraStyle={{ width: '100%', margin: 8, paddingVertical: 20 }}
+        />
+        <ButtonApp
           title="Carga de trabajo"
           onPress={handleCargaTrabajo}
-          extraStyle={{ width: '100%', margin: 8, paddingVertical: 24 }}
+          extraStyle={{ width: '100%', margin: 8, paddingVertical: 20 }}
         />
         <ButtonApp
           title="Cierre de caja"
           onPress={handleCierreCaja}
-          extraStyle={{ width: '100%', margin: 8, paddingVertical: 24 }}
+          extraStyle={{ width: '100%', margin: 8, paddingVertical: 20 }}
         />
         <ButtonApp
-          title="Lanzar sincro 🛜"
-          onPress={handleSincro}
-          extraStyle={{ width: '100%', margin: 8, paddingVertical: 24 }}
+          title="Cerrar sesión"
+          onPress={handleLogout}
+          extraStyle={{ width: '100%', margin: 8, paddingVertical: 20 }}
         />
       </View>
-      <ToastApp
-        visible={showToast}
-        value={textToast}
-        status="success"
-      />
     </View>
   );
 }

@@ -101,11 +101,6 @@ export default function ImporteCobradoScreen() {
       </ScrollView>
 
       <View style={styles.footer}>
-        <ButtonApp
-          title="Imprimir ticket 🛜"
-          onPress={handleTicket}
-          extraStyle={styles.btnTicket}
-        />
         <View style={styles.rowButtons}>
           <ButtonApp
             title="Atrás"
@@ -129,65 +124,17 @@ export default function ImporteCobradoScreen() {
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: "flex-start",
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-  },
-  header: {
-    backgroundColor: "#F2F2F2",
-    padding: 16,
-    borderRadius: 8,
-    marginTop: 20,
-  },
-  headerCliente: {
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  headerCalle: {
-    fontSize: 13,
-    color: "#666",
-  },
-  section: {
-    marginTop: 20,
-    gap: 10,
-  },
-  sectionDatos: {
-    marginTop: 30,
-    padding: 16,
-    gap: 12,
-    backgroundColor: "#F2EDE4",
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 8,
-  },
-  label: {
-    fontWeight: "bold",
-    fontSize: 14,
-  },
-  labelSection: {
-    fontWeight: "bold",
-    fontSize: 13,
-    marginBottom: 4,
-  },
-  footer: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    gap: 10,
-  },
-  btnTicket: {
-    borderRadius: 20,
-  },
-  rowButtons: {
-    flexDirection: "row",
-    gap: 10,
-  },
-  btnAtras: {
-    backgroundColor: "#ddd",
-  },
+  screen: { flex: 1, backgroundColor: "#fff" },
+  scrollContent: { flexGrow: 1, justifyContent: "flex-start", paddingHorizontal: 20, paddingBottom: 20 },
+  header: { backgroundColor: "#F2F2F2", padding: 16, borderRadius: 8, marginTop: 20 },
+  headerCliente: { fontWeight: "bold", fontSize: 16 },
+  headerCalle: { fontSize: 13, color: "#666" },
+  section: { marginTop: 20, gap: 10 },
+  sectionDatos: { marginTop: 30, padding: 16, gap: 12, backgroundColor: "#F2EDE4", borderColor: "#ccc", borderWidth: 1, borderRadius: 8 },
+  label: { fontWeight: "bold", fontSize: 14 },
+  labelSection: { fontWeight: "bold", fontSize: 13, marginBottom: 4 },
+  footer: { paddingHorizontal: 20, paddingVertical: 20, gap: 10 },
+  btnTicket: { borderRadius: 20 },
+  rowButtons: { flexDirection: "row", gap: 10 },
+  btnAtras: { backgroundColor: "#ddd" }
 });

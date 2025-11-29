@@ -1,19 +1,18 @@
 import { getPedidosCargaTrabajo, getResumenPedidosPorEstado, PedidoCargaTrabajoUI } from "@/app/database";
 import BannerCargaTrabajo from "@/components/BannerCargadeTrabajo";
 import InputApp from "@/components/InputApp";
-import LoaderApp from "@/components/LoaderApp";
 import DeliveryEmpty from "@/components/logos/DeliveryEmpty";
 import PedidoExterno from "@/components/PedidoExterno";
+import { useLoading } from "@/context/loaderContext";
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
-import { useFocusEffect } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 
 // * PANTALLA DE CARGA DE TRABAJO * //
 export default function CargaTrabajoScreen() {
+  const { setLoading, setLoadingText } = useLoading();
   const [pedidos, setPedidos] = useState<PedidoCargaTrabajoUI[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState<boolean>(false);
   const [resumen, setResumen] = useState({
@@ -27,7 +26,9 @@ export default function CargaTrabajoScreen() {
   // * Recogiendo los pedidos de la fecha indicada por el usuario * //
   const fetchPedidos = async (fechaISO: string) => {
     try {
+      setLoadingText("Cargando pedidos...");
       setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const data = await getPedidosCargaTrabajo(fechaISO);
       setPedidos(data);
     } catch (err) {
@@ -56,18 +57,6 @@ export default function CargaTrabajoScreen() {
     fetchResumen(fechaISO);
   }, [date]);
 
-  useFocusEffect(
-  useCallback(() => {
-    const hoy = new Date();
-    setDate(hoy);
-
-    const fechaISO = formatDateISO(hoy);
-    fetchPedidos(fechaISO);
-    fetchResumen(fechaISO);
-
-  }, [])
-);
-
   const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     if (event.type === "set" && selectedDate) {
       setDate(selectedDate);
@@ -86,12 +75,10 @@ export default function CargaTrabajoScreen() {
   return (
     <View style={styles.container}>
 
-      {loading && <LoaderApp />}
-
       <BannerCargaTrabajo enReparto={resumen.enReparto} entregados={resumen.entregados} conIncidencias={resumen.conIncidencias}  />
 
       <View style={{ width: "95%", marginTop: 20 }}>
-        <Text style={{ fontSize: 18 }}>Fecha del pedido:</Text>
+        <Text style={{ fontSize: 18 }}>Fecha de pedidos:</Text>
       </View>
 
       <Pressable onPress={toggleDatePicker} style={{ width: "95%" }}>
