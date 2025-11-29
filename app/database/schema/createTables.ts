@@ -13,7 +13,6 @@ export async function createTables() {
       comentariosPicking TEXT,
       direccionEnvio TEXT,
       entradaDocumento INTEGER PRIMARY KEY NOT NULL,
-      estado TEXT,
       estadoDocumento INTEGER,
       estadoPedido INTEGER,
       fechaActualizacion TEXT,
@@ -26,7 +25,10 @@ export async function createTables() {
       nombreCliente TEXT,
       pick INTEGER NOT NULL DEFAULT 0,
       pickStatus INTEGER NOT NULL DEFAULT 0,
-      porcDescuento REAL
+      porcDescuento REAL,
+      dniReceptor TEXT,
+      nombreReceptor TEXT,
+      observacionesEntrega TEXT
     );
 
     CREATE TABLE IF NOT EXISTS ls_lineas_pedido (
@@ -35,17 +37,14 @@ export async function createTables() {
       cantidad REAL,
       codigoAlmacen TEXT,
       codigoProducto TEXT,
-      codigoUnidadMedida TEXT,
       codigoVendedor INTEGER,
       descripcion TEXT,
       elementosPorUnidad REAL,
-      estado TEXT,
       fechaEnvio TEXT,
       grupoIVA TEXT,
       idLineaAlbaran TEXT,
       importe REAL,
       moneda TEXT,
-      nombreUnidadMedida TEXT,
       pickStatus INTEGER NOT NULL DEFAULT 0,
       pickStatusEx TEXT,
       porcDescuento REAL,
@@ -53,7 +52,6 @@ export async function createTables() {
       precioConIVA REAL,
       precioUnidad REAL,
       totalLinea REAL,
-      unidadMedida INTEGER,
       estadoLinea TEXT,
       incidenciaLinea TEXT,
       PRIMARY KEY (entradaDocumento, numeroLinea),

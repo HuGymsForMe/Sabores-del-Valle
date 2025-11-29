@@ -19,8 +19,7 @@ export async function getPedidosCargaTrabajo(fechaISO: string): Promise<PedidoCa
       importeTotal,
       metodoPago,
       estadoDocumento AS estado,
-      fechaDocumento,
-      transportista
+      fechaDocumento    
     FROM ls_pedido
     WHERE DATE(REPLACE(fechaDocumento, 'T', ' ')) = DATE(?)
     ORDER BY fechaDocumento DESC
@@ -36,7 +35,6 @@ export async function getPedidosCargaTrabajo(fechaISO: string): Promise<PedidoCa
     calle: p.direccionEnvio,
     descripcion: p.metodoPago ?? "Sin descripción",
     importe: `${Number(p.importeTotal || 0).toFixed(2)}€`,
-    tipoEntrega: p.transportista ?? "A domicilio",
     estado: estadoDocumentoMap[p.estado] ?? "DESCONOCIDO",
   }));
 }
@@ -51,9 +49,7 @@ export async function getPedidosImporteCobrado(entradaDocumento: number): Promis
       direccionEnvio,
       importeTotal,
       metodoPago,
-      estado,
-      fechaDocumento,
-      transportista
+      fechaDocumento
     FROM ls_pedido
     WHERE entradaDocumento = ?
   `;
@@ -65,9 +61,7 @@ export async function getPedidosImporteCobrado(entradaDocumento: number): Promis
     cliente: p.nombreCliente,
     calle: p.direccionEnvio,
     descripcion: p.metodoPago ?? "Sin descripción",
-    importe: `${Number(p.importeTotal || 0).toFixed(2)}€`,
-    tipoEntrega: p.transportista ?? "A domicilio",
-    estado: p.estado,
+    importe: `${Number(p.importeTotal || 0).toFixed(2)}€`
   }));
 }
 
@@ -80,6 +74,7 @@ export async function getPedidosDetallesPedido(
     `
     SELECT 
       lp.numeroLinea,
+      lp.entradaDocumento,
       lp.descripcion,
       lp.cantidad AS unidades,
       lp.precioConIVA AS importe,
@@ -87,8 +82,7 @@ export async function getPedidosDetallesPedido(
       lp.incidenciaLinea AS incidenciaLinea,
       p.nombreCliente AS cliente,
       p.estadoDocumento AS estadoPedido,
-      p.direccionEnvio AS calle,
-      p.numeroDocumento AS codigoPedido
+      p.direccionEnvio AS calle
     FROM ls_lineas_pedido lp
     INNER JOIN ls_pedido p 
       ON lp.entradaDocumento = p.entradaDocumento
@@ -103,7 +97,7 @@ export async function getPedidosDetallesPedido(
     cliente: l.cliente,
     calle: l.calle,
     estadoPedido: l.estadoPedido,
-    codigoPedido: l.codigoPedido?.toString() ?? "—",
+    entradaDocumento: l.entradaDocumento?.toString() ?? "—",
     descripcion: l.descripcion ?? "",
     unidades: Number(l.unidades) || 0,
     estadoLinea: l.estadoLinea ? Number(l.estadoLinea) : 1,

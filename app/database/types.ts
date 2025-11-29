@@ -4,8 +4,6 @@ export interface PedidoCargaTrabajoUI {
   calle: string;         
   descripcion: string;   
   importe: string;       
-  tipoEntrega: string;   
-  estado: string;        
 }
 
 export interface PedidoDetallesPedidoUI {
@@ -13,7 +11,7 @@ export interface PedidoDetallesPedidoUI {
   cliente: string;    
   estadoPedido: number;   
   calle: string;         
-  codigoPedido: string;
+  entradaDocumento: string;
   descripcion: string;
   unidades: number;
   estadoLinea: number;
