@@ -1,3 +1,4 @@
+import { COLORSAPP } from "@/constants/colors";
 import React from "react";
 import { GestureResponderEvent, Pressable, StyleSheet, Text } from "react-native";
 
@@ -28,8 +29,8 @@ export default function ButtonApp({ title, onPress, disabled, extraStyle, presse
 }
 
 const styles = StyleSheet.create({
-  button: { backgroundColor: "#6EE9D3", paddingVertical: 14, paddingHorizontal: 25, borderRadius: 30, alignItems: "center", shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 3, margin: 6 },
-  buttonPressed: { backgroundColor: "#51e4c9ff", transform: [{ scale: 0.98 }] },
+  button: { backgroundColor: COLORSAPP.cyan, paddingVertical: 14, paddingHorizontal: 25, borderRadius: 30, alignItems: "center", shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 3, margin: 6 },
+  buttonPressed: { backgroundColor: COLORSAPP.cyanSecond, transform: [{ scale: 0.98 }] },
   buttonDisabled: { backgroundColor: "#b0b0b0" },
   text: { color: "#333", fontWeight: "bold", fontSize: 16 },
 });

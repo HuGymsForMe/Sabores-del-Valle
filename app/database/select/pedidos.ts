@@ -1,5 +1,5 @@
 import { getDB } from "@/app/database/db";
-import { CierreDeCajaUI, PedidoCargaTrabajoUI, PedidoDetallesPedidoUI } from "@/app/database/types";
+import { CierreDeCajaRowUI, ConteoEstadoPedidosPorDiaCajaRowUI, ConteoEstadoPedidosPorDiaRowUI, PedidoCargaTrabajoRow, PedidoCargaTrabajoUI, PedidoDetallesPedidoRow, PedidoDetallesPedidoUI, PedidoImporteCobradoRow } from "@/app/database/types";
 
 const estadoDocumentoMap: Record<number, string> = {
   1: "PENDIENTE",
@@ -18,18 +18,17 @@ export async function getPedidosCargaTrabajo(fechaISO: string): Promise<PedidoCa
       direccionEnvio,
       importeTotal,
       metodoPago,
-      estadoDocumento AS estado,
-      fechaDocumento    
+      estadoDocumento AS estado
     FROM ls_pedido
     WHERE DATE(REPLACE(fechaDocumento, 'T', ' ')) = DATE(?)
     ORDER BY fechaDocumento DESC
   `;
 
-  const rows = await db.getAllAsync(query, [fechaISO]);
+  const rows = await db.getAllAsync<PedidoCargaTrabajoRow>(query, [fechaISO]);
 
   console.log("📆 Buscando pedidos del día:", fechaISO, "→ encontrados:", rows.length);
 
-  return rows.map((p: any) => ({
+  return rows.map((p) => ({
     id: p.entradaDocumento,
     cliente: p.nombreCliente,
     calle: p.direccionEnvio,
@@ -54,9 +53,9 @@ export async function getPedidosImporteCobrado(entradaDocumento: number): Promis
     WHERE entradaDocumento = ?
   `;
 
-  const rows = await db.getAllAsync(query, [entradaDocumento]);
+  const rows = await db.getAllAsync<PedidoImporteCobradoRow>(query, [entradaDocumento]);
 
-  return rows.map((p: any) => ({
+  return rows.map((p) => ({
     id: p.entradaDocumento,
     cliente: p.nombreCliente,
     calle: p.direccionEnvio,
@@ -70,8 +69,7 @@ export async function getPedidosDetallesPedido(
 ): Promise<PedidoDetallesPedidoUI[]> {
   const db = await getDB();
 
-  const rows = await db.getAllAsync(
-    `
+  const query = `
     SELECT 
       lp.numeroLinea,
       lp.entradaDocumento,
@@ -88,11 +86,11 @@ export async function getPedidosDetallesPedido(
       ON lp.entradaDocumento = p.entradaDocumento
     WHERE lp.entradaDocumento = ?
     ORDER BY lp.numeroLinea ASC
-    `,
-    [entradaDocumento]
-  );
+    `;
 
-  return rows.map((l: any) => ({
+  const rows = await db.getAllAsync<PedidoDetallesPedidoRow>(query ,[entradaDocumento]);
+
+  return rows.map((l) => ({
     id: l.numeroLinea,
     cliente: l.cliente,
     calle: l.calle,
@@ -110,7 +108,7 @@ export async function getPedidosDetallesPedido(
 }
 
 
-export async function getResumenPedidosPorEstado(fechaISO: string): Promise<any> {
+export async function getResumenPedidosPorEstado(fechaISO: string): Promise<ConteoEstadoPedidosPorDiaRowUI[]> {
   const db = await getDB();
 
   const query = `
@@ -131,17 +129,25 @@ export async function getResumenPedidosPorEstado(fechaISO: string): Promise<any>
        WHERE estadoDocumento = 4 AND DATE(REPLACE(fechaDocumento, 'T', ' ')) = DATE(?)) AS conIncidencias
   `;
 
-  const row = await db.getFirstAsync(query, [fechaISO, fechaISO, fechaISO]);
-  return row;
+  const row = await db.getFirstAsync<ConteoEstadoPedidosPorDiaRowUI>(query, [fechaISO, fechaISO, fechaISO]);
+  
+  if (!row) {
+    return [{
+      enReparto: 0,
+      entregados: 0,
+      conIncidencias: 0
+    }];
+  }
+
+  return [row];
 }
 
-export async function getImporteTotalDiario(): Promise<CierreDeCajaUI> {
+export async function getImporteTotalDiario(): Promise<CierreDeCajaRowUI> {
   const db = await getDB();
 
   const hoy = new Date().toISOString().split("T")[0];
 
-  const row = await db.getFirstAsync<CierreDeCajaUI>(
-    `
+  const query = `
     SELECT 
       (SELECT SUM(importeTotal) 
        FROM ls_pedido 
@@ -165,9 +171,9 @@ export async function getImporteTotalDiario(): Promise<CierreDeCajaUI> {
        WHERE DATE(REPLACE(fechaActualizacion, 'T', ' ')) = DATE(?) 
          AND UPPER(metodoPago) = "TARJETA" 
          AND estadoDocumento == 3) AS importeTotalTarjeta
-    `,
-    [hoy, hoy, hoy, hoy]
-  );
+    `;
+
+  const row = await db.getFirstAsync<CierreDeCajaRowUI>(query, [hoy, hoy, hoy, hoy]);
 
   return {
     importeTotalDiario: row?.importeTotalDiario ?? 0,
@@ -177,13 +183,12 @@ export async function getImporteTotalDiario(): Promise<CierreDeCajaUI> {
   };
 }
 
-export async function getImporteTotalDiarioPorEstadoCaja() {
+export async function getDiarioPorEstadoCaja(): Promise<ConteoEstadoPedidosPorDiaCajaRowUI> {
   const db = await getDB();
 
   const hoy = new Date().toISOString().split("T")[0];
 
-  const row:any = await db.getFirstAsync(
-    `
+  const query = `
     SELECT
 
       -- Completados (estado 3)
@@ -199,14 +204,18 @@ export async function getImporteTotalDiarioPorEstadoCaja() {
        WHERE estadoDocumento = 4
        AND DATE(REPLACE(fechaActualizacion,'T',' ')) = DATE(?)
       ) AS conIncidencias
-    `,
-    [hoy, hoy]
-  );
+    `
 
-  return {
-    entregados: row?.entregados ?? 0,
-    conIncidencias: row?.conIncidencias ?? 0,
-  };
+  const row = await db.getFirstAsync<ConteoEstadoPedidosPorDiaCajaRowUI>(query,[hoy, hoy]);
+
+  if (!row) {
+    return {
+      entregados: 0,
+      conIncidencias: 0
+    };
+  }
+
+  return row;
 }
 
 

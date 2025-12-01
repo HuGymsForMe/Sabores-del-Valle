@@ -6,6 +6,7 @@ import { Alert, ImageBackground, KeyboardAvoidingView, ScrollView, StyleSheet, T
 
 import ButtonApp from "@/components/ButtonApp";
 import InputApp from "@/components/InputApp";
+import { COLORSAPP } from "@/constants/colors";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -42,7 +43,7 @@ export default function HomeScreen() {
 
             <View style={styles.blockUser}>
               <View style={styles.userIconWrapper}>
-                <Entypo name="user" size={40} color="#13c2ac" />
+                <Entypo name="user" size={40} color={COLORSAPP.cyanThird} />
               </View>
               <Text style={styles.titleLogin}>Iniciar Sesión</Text>
             </View>

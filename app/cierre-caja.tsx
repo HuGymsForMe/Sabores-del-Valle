@@ -1,4 +1,4 @@
-import { CierreDeCajaUI, getImporteTotalDiario, getImporteTotalDiarioPorEstadoCaja } from "@/app/database";
+import { CierreDeCajaRowUI, getDiarioPorEstadoCaja, getImporteTotalDiario } from "@/app/database";
 import BannerCargaTrabajo from "@/components/BannerCargadeTrabajo";
 import InfoApp from "@/components/InfoApp";
 import LogoSaboresDelValle from "@/components/logos/LogoSaboresDelValle";
@@ -11,7 +11,7 @@ export default function CierreCajaScreen() {
 
   const { setLoading, setLoadingText } = useLoading();
 
-    const [prices, setPrices] = useState<CierreDeCajaUI>({
+    const [prices, setPrices] = useState<CierreDeCajaRowUI>({
         importeTotalDiario: 0,
         importeTotalEfectivo: 0,
         importeTotalBizum: 0,
@@ -30,7 +30,7 @@ export default function CierreCajaScreen() {
 
       await new Promise(resolve => setTimeout(resolve, 2000));
       const data = await getImporteTotalDiario();
-      const resumenCaja = await getImporteTotalDiarioPorEstadoCaja();
+      const resumenCaja = await getDiarioPorEstadoCaja();
       
       setPrices(data);
       setResumen(resumenCaja);

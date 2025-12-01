@@ -1,4 +1,5 @@
 import IconoMaps from "@/components/logos/IconoMaps";
+import { COLORSAPP } from "@/constants/colors";
 import { Linking, Pressable, StyleSheet, Text, View } from "react-native";
 
 interface BannerDetallePedidoProps {
@@ -34,7 +35,7 @@ export default function BannerDetallePedido({ cliente, direccion }: BannerDetall
 }
 
 const styles = StyleSheet.create({
-    blockIcons: { flexDirection: "row", justifyContent: "space-evenly", paddingHorizontal: 20, alignItems: "center", width: "100%", backgroundColor: "#90e1ff", paddingVertical: 20, borderBottomRightRadius: 10,  borderBottomLeftRadius: 10 },
+    blockIcons: { flexDirection: "row", justifyContent: "space-evenly", paddingHorizontal: 20, alignItems: "center", width: "100%", backgroundColor: COLORSAPP.cyan, paddingVertical: 20, borderBottomRightRadius: 10,  borderBottomLeftRadius: 10 },
     textTitle:{ fontWeight: "bold" },
     blockText:{ alignItems: "flex-start", flex: 1, flexWrap: "wrap" },
     blockIcon:{ alignItems: "center", justifyContent: "center" },

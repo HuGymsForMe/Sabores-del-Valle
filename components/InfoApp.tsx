@@ -1,3 +1,4 @@
+import { COLORSAPP } from "@/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -20,6 +21,6 @@ export default function InfoApp({bodyText}: InfoAppProps) {
 export const styles = StyleSheet.create({
     infoBlock: { width: "90%", alignItems: "center", gap: 10, paddingTop: 20 },
    infoAlert: { width: "90%", padding: 15, borderRadius: 8, backgroundColor: "#A1E9C5", flexDirection: "row", gap: 10, alignItems: "flex-start"},
-    infoAlertTitle: { fontWeight: "bold", fontSize: 14, marginBottom: 3, color: "#074a29ff" },
-    infoAlertText: { fontSize: 13, color: "#08562fff" },
+    infoAlertTitle: { fontWeight: "bold", fontSize: 14, marginBottom: 3, color: COLORSAPP.darkGreen },
+    infoAlertText: { fontSize: 13, color: COLORSAPP.darkGreen },
 })

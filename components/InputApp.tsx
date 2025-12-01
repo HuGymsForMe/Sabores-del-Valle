@@ -1,3 +1,4 @@
+import { COLORSAPP } from "@/constants/colors";
 import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
@@ -54,7 +55,7 @@ export default function InputApp({ value, onChangeText, placeholder, secureTextE
 
 const styles = StyleSheet.create({
   inputContainer: { position: "relative", width: "100%", justifyContent: "center" },
-  inputText: { height: 50, borderWidth: 1.5, paddingHorizontal: 12, backgroundColor: "#fff", borderColor: "#13c2ac", borderRadius: 10, marginBottom: 14, paddingRight: 45, fontSize: 16, shadowColor: "#333", elevation: 3, color: "#097465ff", fontWeight: "bold" },
+  inputText: { height: 50, borderWidth: 1.5, paddingHorizontal: 12, backgroundColor: "#fff", borderColor: COLORSAPP.cyanThird, borderRadius: 10, marginBottom: 14, paddingRight: 45, fontSize: 16, shadowColor: "#333", elevation: 3, color: COLORSAPP.darkGreen, fontWeight: "bold" },
   iconContainer: { position: "absolute", right: 12, height: "100%", justifyContent: "center" },
   multiline: { height: 120, paddingTop: 12, paddingRight: 45, backgroundColor: "#fbfbfb" },
 });

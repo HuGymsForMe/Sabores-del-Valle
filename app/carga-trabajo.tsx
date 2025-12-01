@@ -3,6 +3,7 @@ import BannerCargaTrabajo from "@/components/BannerCargadeTrabajo";
 import InputApp from "@/components/InputApp";
 import DeliveryEmpty from "@/components/logos/DeliveryEmpty";
 import PedidoExterno from "@/components/PedidoExterno";
+import { COLORSAPP } from "@/constants/colors";
 import { useLoading } from "@/context/loaderContext";
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { useEffect, useState } from "react";
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
   blockTextDateText: { fontSize: 18 },
   pressDate: { width: "95%" },
   scrollView: { width: "95%" },
-  text: { fontSize: 18, marginTop: 20, color: "#69daa2ff" },
+  text: { fontSize: 20, marginTop: 20, color: COLORSAPP.darkGreen },
   sinPedidosContainer: { alignItems: "center", marginTop: 30 },
   scrollContainer: { paddingHorizontal: 0, paddingVertical: 10 },
 });

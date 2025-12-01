@@ -1,6 +1,7 @@
 import IconoInfo from "@/components/logos/IconoInfo";
 import IconoPack from "@/components/logos/IconoPack";
 import IconoTruck from "@/components/logos/IconoTruck";
+import { COLORSAPP } from "@/constants/colors";
 import { StyleSheet, Text, View } from "react-native";
 
 interface BannerCargaTrabajoProps {
@@ -34,6 +35,6 @@ export default function BannerCargaTrabajo({enReparto=0, entregados=0, conIncide
 }
 
 const styles = StyleSheet.create({
-    blockIcons: { flexDirection: "row", justifyContent: "space-around", alignItems: "center", width: "100%", backgroundColor: "#6EE9D3", paddingVertical: 20, borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
+    blockIcons: { flexDirection: "row", justifyContent: "space-around", alignItems: "center", width: "100%", backgroundColor: COLORSAPP.cyan, paddingVertical: 20, borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
     blockIcon:{ alignItems: "center", justifyContent: "center" }
 })

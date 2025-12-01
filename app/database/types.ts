@@ -1,9 +1,44 @@
+/** getPedidosCargaTrabajo  **/
+export interface PedidoCargaTrabajoRow {
+  entradaDocumento: number;
+  nombreCliente: string;
+  direccionEnvio: string;
+  importeTotal: number;
+  metodoPago: string | null;
+  estado: number;
+}
+
 export interface PedidoCargaTrabajoUI {
   id: number;            
   cliente: string;       
   calle: string;         
   descripcion: string;   
-  importe: string;       
+  importe: string;  
+  estado?: string;     
+}
+
+/** getPedidosImporteCobrado **/
+export interface PedidoImporteCobradoRow {
+  entradaDocumento: number;
+  nombreCliente: string;
+  direccionEnvio: string;
+  importeTotal: number;
+  metodoPago: string | null;
+  fechaDocumento: string;
+}
+
+/** getPedidosDetallesPedido **/
+export interface PedidoDetallesPedidoRow {
+  numeroLinea: number;
+  entradaDocumento: number;
+  descripcion: string;
+  unidades: number;
+  importe: number;
+  estadoLinea: number;
+  incidenciaLinea: number;
+  cliente: string;
+  estadoPedido: number;
+  calle: string;
 }
 
 export interface PedidoDetallesPedidoUI {
@@ -19,12 +54,27 @@ export interface PedidoDetallesPedidoUI {
   importe: number;
 }
 
-export interface CierreDeCajaUI {
+/** getResumenPedidosPorEstado **/
+export interface ConteoEstadoPedidosPorDiaRowUI {
+  enReparto: number;
+  entregados: number;
+  conIncidencias: number;
+}
+
+/** getImporteTotalDiario **/
+export interface CierreDeCajaRowUI {
   importeTotalDiario: number;
   importeTotalEfectivo: number;
   importeTotalBizum: number;
   importeTotalTarjeta: number;
 }
+
+/** getDiarioPorEstadoCaja **/
+export interface ConteoEstadoPedidosPorDiaCajaRowUI {
+  entregados: number;
+  conIncidencias: number;
+}
+
 
 
 
