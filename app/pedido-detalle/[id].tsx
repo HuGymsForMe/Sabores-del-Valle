@@ -157,6 +157,23 @@ export default function PedidoDetalleScreen() {
           />
         </View>)}
 
+        {/* {lineas[0]?.estadoPedido === 3 &&
+          lineas[0]?.dniReceptor &&
+          lineas[0]?.nombreReceptor &&
+          lineas[0]?.observacionesEntrega && (
+            <View style={{ marginTop: 15 }}>
+              <Text style={styles.modalCharacteristics}>
+                DNI receptor: {lineas[0]?.dniReceptor}
+              </Text>
+              <Text style={styles.modalCharacteristics}>
+                Nombre receptor: {lineas[0]?.nombreReceptor}
+              </Text>
+              <Text style={styles.modalCharacteristics}>
+                Observaciones: {lineas[0]?.observacionesEntrega}
+              </Text>
+            </View>
+          )} */}
+
       </View>
 
       <Modal visible={modalVisible} transparent animationType="slide">

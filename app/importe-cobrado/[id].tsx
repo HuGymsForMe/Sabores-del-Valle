@@ -27,7 +27,7 @@ export default function ImporteCobradoScreen() {
   }
 
   const handleMarcarPedido = () => {
-    updateEstadoPedido(Number(id));
+    updateEstadoPedido(Number(id), dni, nombre, observaciones);
     Alert.alert(
       "Pedido cerrado",
       `El pedido ${id} ha sido marcado.`,
@@ -84,17 +84,17 @@ export default function ImporteCobradoScreen() {
           <InputApp
             placeholder="DNI"
             value={dni}
-            onChangeText={setDni}
+            onChangeText={(text) => setDni(text)}
           />
           <InputApp
             placeholder="Nombre"
             value={nombre}
-            onChangeText={setNombre}
+            onChangeText={(text) => setNombre(text)}
           />
           <InputApp
             placeholder="Observaciones"
             value={observaciones}
-            onChangeText={setObservaciones}
+            onChangeText={(text) => setObservaciones(text)}
             multiline={true}
           />
         </View>

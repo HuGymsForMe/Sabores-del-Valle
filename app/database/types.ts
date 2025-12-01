@@ -39,6 +39,9 @@ export interface PedidoDetallesPedidoRow {
   cliente: string;
   estadoPedido: number;
   calle: string;
+  dniReceptor: string;
+  nombreReceptor: string;
+  observacionesEntrega: string;
 }
 
 export interface PedidoDetallesPedidoUI {
@@ -52,6 +55,9 @@ export interface PedidoDetallesPedidoUI {
   estadoLinea: number;
   incidenciaLinea: number;
   importe: number;
+  dniReceptor: string;
+  nombreReceptor: string;
+  observacionesEntrega: string;
 }
 
 /** getResumenPedidosPorEstado **/

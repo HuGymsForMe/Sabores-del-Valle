@@ -25,7 +25,7 @@ export async function updateIncidenciaPedido(
   }
 }
 
-export async function updateEstadoPedido(entradaDocumento: number) {
+export async function updateEstadoPedido(entradaDocumento: number, dniReceptor: string, nombreReceptor: string, observacionesReceptor: string) {
   const db = await getDB();
 
   try {
@@ -46,10 +46,10 @@ export async function updateEstadoPedido(entradaDocumento: number) {
     await db.runAsync(
       `
       UPDATE ls_pedido 
-      SET estadoDocumento = ?, fechaActualizacion = ?
+      SET estadoDocumento = ?, fechaActualizacion = ?, dniReceptor = ?, nombreReceptor = ?, observacionesEntrega = ?
       WHERE entradaDocumento = ?
       `,
-      [nuevoEstado, new Date().toISOString(), entradaDocumento]
+      [nuevoEstado, new Date().toISOString(), dniReceptor, nombreReceptor, observacionesReceptor, entradaDocumento]
     );
 
     console.log(
@@ -63,5 +63,4 @@ export async function updateEstadoPedido(entradaDocumento: number) {
     return false;
   }
 }
-
 

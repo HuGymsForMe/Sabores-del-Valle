@@ -78,6 +78,9 @@ export async function getPedidosDetallesPedido(
       lp.precioConIVA AS importe,
       lp.estadoLinea AS estadoLinea,
       lp.incidenciaLinea AS incidenciaLinea,
+      p.dniReceptor AS dniReceptor,
+      p.nombreReceptor AS nombreReceptor,
+      p.observacionesEntrega AS observacionesEntrega,
       p.nombreCliente AS cliente,
       p.estadoDocumento AS estadoPedido,
       p.direccionEnvio AS calle
@@ -101,8 +104,10 @@ export async function getPedidosDetallesPedido(
     estadoLinea: l.estadoLinea ? Number(l.estadoLinea) : 1,
     incidenciaLinea:
     l.incidenciaLinea !== null && l.incidenciaLinea !== undefined
-    ? Number(l.incidenciaLinea)
-    : 0,
+    ? Number(l.incidenciaLinea) : 0,
+    dniReceptor: l.dniReceptor ?? "",
+    nombreReceptor: l.nombreReceptor ?? "",
+    observacionesEntrega: l.observacionesEntrega ?? "",
     importe: Number(l.importe || 0),
   }));
 }
