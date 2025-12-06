@@ -33,8 +33,8 @@ export default function RootLayout() {
           <Stack>
             <Stack.Screen name="index" options={{ title: "Sabores del Valle", headerShown: false}} />
             <Stack.Screen name="menu" options={{ title: "Inicio", headerBackVisible: false }} />
-            <Stack.Screen name="carga-trabajo" options={{ title: "Carga de Trabajo" }} />
-            <Stack.Screen name="cierre-caja" options={{ title: "Cierre de Caja" }} />
+            <Stack.Screen name="carga-trabajo" options={{ title: "Carga de trabajo" }} />
+            <Stack.Screen name="cierre-caja" options={{ title: "Cierre de caja" }} />
             <Stack.Screen name="pedido-detalle/[id]" options={{ title: "Detalles" }} />
             <Stack.Screen name="importe-cobrado/[id]" options={{ title: "Importe" }} />
           </Stack>

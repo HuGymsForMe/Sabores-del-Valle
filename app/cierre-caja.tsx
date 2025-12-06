@@ -1,10 +1,11 @@
 import { CierreDeCajaRowUI, getDiarioPorEstadoCaja, getImporteTotalDiario } from "@/app/database";
 import BannerCargaTrabajo from "@/components/BannerCargadeTrabajo";
 import InfoApp from "@/components/InfoApp";
-import LogoSaboresDelValle from "@/components/logos/LogoSaboresDelValle";
+import InputApp from "@/components/InputApp";
 import { useLoading } from "@/context/loaderContext";
+import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 // * PANTALLA DE CIERRE DE CAJA * //
 export default function CierreCajaScreen() {
@@ -17,38 +18,84 @@ export default function CierreCajaScreen() {
         importeTotalBizum: 0,
         importeTotalTarjeta: 0,
     });
+
     const [resumen, setResumen] = useState({
       entregados: 0,
       conIncidencias: 0
     });
 
-    useEffect(() => {
-  (async () => {
-    try {
-      setLoadingText("Calculando cierre de caja...");
-      setLoading(true);
+    const [showPicker, setShowPicker] = useState<boolean>(false);
+    const [date, setDate] = useState(new Date());
 
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      const data = await getImporteTotalDiario();
-      const resumenCaja = await getDiarioPorEstadoCaja();
-      
-      setPrices(data);
-      setResumen(resumenCaja);
-    } catch (err) {
-      console.error("❌ Error al obtener cierre de caja:", err);
-    } finally {
-      setLoading(false);
-    }
-  })();
-}, []);
+    const formatDateISO = (d: Date) => d.toISOString().split("T")[0];
+
+    const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+      if (event.type === "set" && selectedDate) {
+        setDate(selectedDate);
+      }
+      setShowPicker(false);
+    };
+
+    useEffect(() => {
+      (async () => {
+        try {
+          setLoadingText("Calculando cierre de caja...");
+          setLoading(true);
+
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          const fechaISO = formatDateISO(date);
+
+          const data = await getImporteTotalDiario(fechaISO);
+          const resumenCaja = await getDiarioPorEstadoCaja(fechaISO);
+          
+          setPrices(data);
+          setResumen(resumenCaja);
+
+        } catch (err) {
+          console.error("❌ Error al obtener cierre de caja:", err);
+        } finally {
+          setLoading(false);
+        }
+    })();
+  }, [date]);
+
+
+  const formattedDate = date.toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
+  const toggleDatePicker = () => setShowPicker(!showPicker);
+
 
 
     return (<ScrollView style={{flex: 1}} contentContainerStyle={styles.container}>
             <BannerCargaTrabajo esVisibleReparto={false} entregados={resumen.entregados} conIncidencias={resumen.conIncidencias} />
 
-      <LogoSaboresDelValle />
+      {showPicker && (
+        <DateTimePicker
+          mode="date"
+          display="calendar"
+          value={date}
+          onChange={onChange}
+          positiveButton={{label: 'OK'}}
+          negativeButton={{label: 'SALIR', textColor: 'red'}}
+        />
+      )}
 
       <Text style={styles.textTitle}>Resumen de cierre de caja</Text>
+
+      <Pressable onPress={toggleDatePicker} style={styles.pressDate}>
+        <InputApp
+          placeholder="Fecha de carga de trabajo..."
+          value={formattedDate}
+          editable={false}
+          extraStyle={{ marginTop: 8, width: "100%" }}
+          onChangeText={() => console.log("Cambiando")}
+        />
+      </Pressable>
 
       <View style={styles.containerTotal}>
         <Text style={styles.textTotal}>Total cobrado:</Text>
@@ -85,12 +132,15 @@ export default function CierreCajaScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flexGrow: 1, alignItems: "center", gap: 20, paddingBottom: 40 },
-    textTitle: { fontSize: 22, marginTop: 10, color: "#000" },
-    containerTotal: { flexDirection: "row", justifyContent: "space-between", width: "90%", marginTop: 10 },
-    textTotal: { fontWeight: "bold", fontSize: 18 },
-    textPaymentMethod: { fontWeight: "bold", width: "90%", marginTop: 20 },
-    containerMetodosDesglose: { flexDirection: "column", justifyContent: "space-between", width: "90%", marginVertical: 20, gap: 15, borderTopWidth: 1, borderTopColor: "#ccc", paddingTop: 20  },
-    containerMetodosDesgloseIndividual: { flexDirection: "row", justifyContent: "space-between", marginVertical: 5},
-    containerMetodosDesgloseIndividualText: { fontSize: 15 }
-})
+  container: { flexGrow: 1, alignItems: "center", paddingBottom: 20, backgroundColor: "#F5F5F5", gap: 25 },
+  textTitle: { fontSize: 22, fontWeight: "bold", color: "#222", marginTop: 10, marginBottom: -10 },
+  pressDate: { width: "90%", alignSelf: "center" },
+  blockDate: { width: "90%", marginBottom: 10 },
+  blockTextDateText: { fontSize: 18, fontWeight: "600", color: "#333", marginBottom: 5 },
+  containerTotal: { width: "90%", padding: 18, borderRadius: 14, backgroundColor: "#fff", shadowColor: "#444", elevation: 2, marginTop: 5, flexDirection: "row", justifyContent: "space-between" },
+  textTotal: { fontSize: 20, fontWeight: "700", color: "#333" },
+  textPaymentMethod: { fontSize: 18, fontWeight: "700", color: "#333", width: "90%", marginTop: 15 },
+  containerMetodosDesglose: { width: "90%", padding: 18, borderRadius: 14, backgroundColor: "#fff", shadowColor: "#444",elevation: 2, gap: 15 },
+  containerMetodosDesgloseIndividual: { flexDirection: "row", justifyContent: "space-between" },
+  containerMetodosDesgloseIndividualText: { fontSize: 16, fontWeight: "600", color: "#444" },
+});

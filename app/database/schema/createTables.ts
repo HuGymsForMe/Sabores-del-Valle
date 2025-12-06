@@ -57,6 +57,7 @@ export async function createTables() {
       PRIMARY KEY (entradaDocumento, numeroLinea),
       FOREIGN KEY (entradaDocumento) REFERENCES ls_pedido(entradaDocumento) ON DELETE CASCADE
     );
+
   `);
 
   console.log("✅ Tablas creadas correctamente.");
