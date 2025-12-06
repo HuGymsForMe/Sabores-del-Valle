@@ -122,6 +122,7 @@ export default function PedidoDetalleScreen() {
                 estadoLinea={item.estadoLinea}
                 incidenciaLinea={item.incidenciaLinea}
                 onPress={() => openLineaModal(item)}
+                disabled={lineas[0]?.estadoPedido === 3}
               />
             ))
           ) : (

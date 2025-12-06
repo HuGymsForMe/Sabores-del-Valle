@@ -8,6 +8,7 @@ interface PedidoLineaItemProps {
   estadoLinea: number;
   incidenciaLinea?: number;
   onPress?: () => void;
+  disabled?: boolean;
 }
 
 const incidenciaText: Record<number, string> = {
@@ -17,7 +18,7 @@ const incidenciaText: Record<number, string> = {
   4: "Dirección errónea",
 };
 
-export default function PedidoLineaItem({ descripcion, unidades, importe, estadoLinea, incidenciaLinea, onPress }: PedidoLineaItemProps) {
+export default function PedidoLineaItem({ descripcion, unidades, importe, estadoLinea, incidenciaLinea, onPress, disabled=false }: PedidoLineaItemProps) {
 
   let backgroundColor = "#F8F8F4";
   let estadoLabel = "Pendiente";
@@ -42,6 +43,7 @@ export default function PedidoLineaItem({ descripcion, unidades, importe, estado
         { backgroundColor: pressed ? "#ddd" : backgroundColor },
       ]}
       onPress={onPress}
+      disabled={disabled}
     >
       <View style={styles.colLeft}>
         <Text style={styles.descripcion}>{descripcion}</Text>
