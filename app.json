@@ -2,13 +2,13 @@
   "expo": {
     "name": "Sabores del Valle",
     "slug": "sabores-del-valle",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/sdv_logo.png",
     "splash": {
       "image": "./assets/images/sdv_logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#0a5c0a"
+      "backgroundColor": "#E3FAF2"
     },
     "assetBundlePatterns": [
       "**/*"

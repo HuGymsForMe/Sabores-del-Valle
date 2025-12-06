@@ -51,6 +51,37 @@ export default function PedidoDetalleScreen() {
     await reload();
   };
 
+  const completarTodasLasLineas = async () => {
+  try {
+    if (lineas.length === 0) return;
+
+    // Estado 3 = completado
+    await Promise.all(
+      lineas.map((l) =>
+        updateIncidenciaPedido(
+          Number(id), 
+          l.id,           
+          3,             
+          null           
+        )
+      )
+    );
+
+    Alert.alert(
+      "Completado",
+      "Todas las líneas han sido marcadas como completadas.",
+      [{ text: "OK" }]
+    );
+
+    await reload();
+
+  } catch (error) {
+    console.error("Error completando líneas:", error);
+    Alert.alert("Error", "No se pudieron completar todas las líneas.");
+  }
+};
+
+
   const asignarIncidencia = async () => {
 
     console.log(incidencia);
@@ -132,48 +163,47 @@ export default function PedidoDetalleScreen() {
           )}
         </ScrollView>
 
-        { lineas[0]?.estadoPedido !== 3 && (<View style={styles.buttonContainer}>
-          <ButtonApp
-            title="Atrás"
-            onPress={() => router.back()}
-            extraStyle={{ marginVertical: 16, paddingVertical: 20, flex: 1 }}
-          />
-          <ButtonApp
-            title="Efectuar pago"
-            onPress={() => {
-              const hayPendientes = lineas.some(l => l.estadoLinea === 1);
+        {lineas[0]?.estadoPedido !== 3 && (
+          <View style={styles.footer}>
 
-              if (hayPendientes) {
-                Alert.alert(
-                  "Líneas pendientes",                    
-                  "Tienes líneas pendientes. Debes actualizar los estados antes de efectuar el pago.",      
-                  [{ text: "OK" }]
-                );
-                return; 
-              }
-
-              router.push(`/importe-cobrado/${id}`);
-            }}
-            extraStyle={{ marginVertical: 16, paddingVertical: 20, flex: 1 }}
-          />
-        </View>)}
-
-        {/* {lineas[0]?.estadoPedido === 3 &&
-          lineas[0]?.dniReceptor &&
-          lineas[0]?.nombreReceptor &&
-          lineas[0]?.observacionesEntrega && (
-            <View style={{ marginTop: 15 }}>
-              <Text style={styles.modalCharacteristics}>
-                DNI receptor: {lineas[0]?.dniReceptor}
-              </Text>
-              <Text style={styles.modalCharacteristics}>
-                Nombre receptor: {lineas[0]?.nombreReceptor}
-              </Text>
-              <Text style={styles.modalCharacteristics}>
-                Observaciones: {lineas[0]?.observacionesEntrega}
-              </Text>
+            <View style={styles.topButtonContainer}>
+              <ButtonApp
+                title="Completar todas las líneas"
+                onPress={completarTodasLasLineas}
+                extraStyle={{ paddingVertical: 18 }}
+              />
             </View>
-          )} */}
+
+            <View style={styles.bottomButtonContainer}>
+              <ButtonApp
+                title="Atrás"
+                onPress={() => router.back()}
+                extraStyle={{ flex: 1, paddingVertical: 18 }}
+              />
+
+              <ButtonApp
+                title="Efectuar pago"
+                onPress={() => {
+                  const hayPendientes = lineas.some(l => l.estadoLinea === 1);
+
+                  if (hayPendientes) {
+                    Alert.alert(
+                      "Líneas pendientes",
+                      "Tienes líneas pendientes. Debes actualizar los estados antes de efectuar el pago.",
+                      [{ text: "OK" }]
+                    );
+                    return;
+                  }
+
+                  router.push(`/importe-cobrado/${id}`);
+                }}
+                extraStyle={{ flex: 1, paddingVertical: 18 }}
+              />
+            </View>
+
+          </View>
+        )}
+
 
       </View>
 
@@ -260,4 +290,7 @@ const styles = StyleSheet.create({
   modalFooter: { flexDirection: "row", justifyContent: "space-between", gap: 10, marginTop: "auto" },
   footerButton: { flex: 1, paddingVertical: 14, borderRadius: 6 },
   footerButtonText: { color: "#fff", textAlign: "center", fontWeight: "bold", fontSize: 11 },
+  footer: {paddingHorizontal: 16, paddingVertical: 16, position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "#fff", gap: 4 },
+  topButtonContainer: { width: "100%" },
+  bottomButtonContainer: { flexDirection: "row", width: "100%", gap: 4 }
 });

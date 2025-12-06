@@ -60,6 +60,7 @@ export async function getPedidosImporteCobrado(entradaDocumento: number): Promis
     cliente: p.nombreCliente,
     calle: p.direccionEnvio,
     descripcion: p.metodoPago ?? "Sin descripción",
+    metodoDePago: p.metodoPago,
     importe: `${Number(p.importeTotal || 0).toFixed(2)}€`
   }));
 }

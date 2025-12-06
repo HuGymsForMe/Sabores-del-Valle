@@ -35,6 +35,15 @@ export default function ImporteCobradoScreen() {
     );
   }
 
+  const comprobarMetodoDePago = (metodoPago: string | undefined) => {
+    if (!metodoPago) return "💸";
+
+    if (metodoPago === "Bizum") return "📱";
+    if (metodoPago === "Tarjeta") return "💳";
+    return "💸";
+  };
+
+
   useEffect(() => {
     (async () => {
       if (!id) return;
@@ -60,12 +69,12 @@ export default function ImporteCobradoScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {pedido && (
+        {pedido && (<>
           <View style={styles.header}>
             <Text style={styles.headerCliente}>{pedido.cliente}</Text>
             <Text style={styles.headerCalle}>{pedido.calle}</Text>
           </View>
-        )}
+        
 
         <View style={styles.section}>
           <Text style={styles.label}>Importe cobrado</Text>
@@ -76,6 +85,14 @@ export default function ImporteCobradoScreen() {
             editable={false}
           />
         </View>
+
+        <View style={styles.containerMetodo}>
+          <Text style={styles.containerMetodoText}>Método de pago:</Text>
+          <Text style={styles.containerMetodoTextType}>{comprobarMetodoDePago(pedido?.metodoDePago)}</Text>
+        </View>
+
+        </>)}
+        
 
         <View style={styles.sectionDatos}>
           <Text style={styles.labelSection}>
@@ -126,11 +143,14 @@ export default function ImporteCobradoScreen() {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: "#fff" },
   scrollContent: { flexGrow: 1, justifyContent: "flex-start", paddingHorizontal: 20, paddingBottom: 20 },
+  containerMetodo: { width: "100%", padding: 18, borderRadius: 14,  backgroundColor: "#F2F2F2", marginTop: 5, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  containerMetodoText: { fontSize: 16, fontWeight: "700", color: "#333"},
+  containerMetodoTextType: { fontSize: 22 },
   header: { backgroundColor: "#F2F2F2", padding: 16, borderRadius: 8, marginTop: 20 },
   headerCliente: { fontWeight: "bold", fontSize: 16 },
   headerCalle: { fontSize: 13, color: "#666" },
   section: { marginTop: 20, gap: 10 },
-  sectionDatos: { marginTop: 30, padding: 16, gap: 12, backgroundColor: "#F2EDE4", borderColor: "#ccc", borderWidth: 1, borderRadius: 8 },
+  sectionDatos: { marginTop: 20, padding: 16, gap: 12, backgroundColor: "#F2EDE4", borderColor: "#ccc", borderWidth: 1, borderRadius: 8 },
   label: { fontWeight: "bold", fontSize: 14 },
   labelSection: { fontWeight: "bold", fontSize: 13, marginBottom: 4 },
   footer: { paddingHorizontal: 20, paddingVertical: 20, gap: 10 },

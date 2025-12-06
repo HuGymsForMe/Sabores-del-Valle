@@ -14,7 +14,8 @@ export interface PedidoCargaTrabajoUI {
   calle: string;         
   descripcion: string;   
   importe: string;  
-  estado?: string;     
+  estado?: string;  
+  metodoDePago?: string;   
 }
 
 /** getPedidosImporteCobrado **/
@@ -23,7 +24,7 @@ export interface PedidoImporteCobradoRow {
   nombreCliente: string;
   direccionEnvio: string;
   importeTotal: number;
-  metodoPago: string | null;
+  metodoPago: string;
   fechaDocumento: string;
 }
 
