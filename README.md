@@ -39,7 +39,7 @@ Puedes consultar el código fuente y seguir su desarrollo aquí:
 
 ## 📱 Descarga de la APK
 
-La versión actual 1.0.1 de **Sabores del Valle** está disponible **solo para Android**, tanto para **móviles como para tablets**.  
+La versión actual 1.1.0 de **Sabores del Valle** está disponible **solo para Android**, tanto para **móviles como para tablets**.  
 
 👉 **[Descargar APK de la versión actual](https://expo.dev/accounts/hugymsforme/projects/sabores-del-valle/builds/13ec2524-00ab-4562-89ee-68fa9f67de21)**  
 
