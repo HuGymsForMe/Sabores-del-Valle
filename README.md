@@ -32,6 +32,12 @@ Sabores del Valle es una aplicación móvil diseñada para facilitar la gestión
 - 🗄️ **SQLite** (Para almacenamiento local de pedidos y usuarios)
 - 🎨 **CSS** (Para estilos y diseño de UI)
 
+![](https://img.shields.io/badge/React_Native-0.81-61DAFB?style=for-the-badge&logo=react&logoColor=white)<br>
+![](https://img.shields.io/badge/TypeScript-5.9-3179C7?style=for-the-badge&logo=typescript&logoColor=white)<br>
+![](https://img.shields.io/badge/SQLite-3.51-F7E868?style=for-the-badge&logo=sqlite&logoColor=white)<br>
+![](https://img.shields.io/badge/Expo-51.x-000?style=for-the-badge&logo=expo&logoColor=white)<br>
+![](https://img.shields.io/badge/CSS-3.x-663399?style=for-the-badge&logo=css&logoColor=white)
+
 ## 🌐 Repositorio del proyecto
 Puedes consultar el código fuente y seguir su desarrollo aquí:
 
