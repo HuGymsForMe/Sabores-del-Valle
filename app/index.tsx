@@ -29,8 +29,9 @@ export default function HomeScreen() {
       >
       <KeyboardAvoidingView
         style={styles.keyboardAvoidingView}
-        behavior="height"
-        keyboardVerticalOffset={0}
+        behavior="padding"
+        keyboardVerticalOffset={-100}
+
       >
 
         <ScrollView
