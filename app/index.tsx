@@ -2,10 +2,11 @@ import { useAuth } from "@/context/userContext";
 import { Entypo } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Alert, ImageBackground, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import ButtonApp from "@/components/ButtonApp";
 import InputApp from "@/components/InputApp";
+import ToastApp from "@/components/ToastApp";
 import { COLORSAPP } from "@/constants/colors";
 
 export default function HomeScreen() {
@@ -14,11 +15,16 @@ export default function HomeScreen() {
 
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
+  const [toast, setToast] = useState<{
+    id: number;
+    text: string;
+    status: "success" | "error" | "info";
+  } | null>(null);
 
   const handleLogin = () => {
     const exito = login(usuario, password);
     if (exito) router.push("/menu");
-    else Alert.alert("Error de autenticación", "Usuario o contraseña incorrectos");
+    else setToast({ id: Date.now(), text: "Credenciales incorrectas", status: "error" });
   };
 
   return (
@@ -69,7 +75,7 @@ export default function HomeScreen() {
             />
 
           </View>
-
+          <ToastApp toast={toast} />
         </ScrollView>
       </KeyboardAvoidingView>
       </ ImageBackground>

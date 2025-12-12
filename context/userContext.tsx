@@ -20,7 +20,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLogged, setIsLogged] = useState(false);
 
   const login = (usuario: string, password: string) => {
-    if (usuario.trim() === "HuGyms" && password.trim() === "1234") {
+    if (usuario.trim() === "user" && password.trim() === "1234") {
       setIsLogged(true);
       return true;
     }

@@ -1,72 +1,133 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
-import { Animated, StyleSheet, Text } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, StyleSheet, Text, View } from "react-native";
 
 interface ToastAppProps {
-  value?: string;
-  extraStyle?: object;
-  status: "success" | "error" | "info";
-  visible?: boolean;
+  toast: {
+    id: number;
+    text: string;
+    status: "success" | "error" | "info";
+  } | null;
   duration?: number;
 }
 
-export default function ToastApp({ value, extraStyle, status = "info", visible = false, duration = 3000 }: ToastAppProps) {
-  const [show, setShow] = useState(visible);
-  const fadeAnim = useState(new Animated.Value(0))[0];
+export default function ToastApp({ toast, duration = 3000 }: ToastAppProps) {
+  const [show, setShow] = useState(false);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(-10)).current;
 
   useEffect(() => {
-    if (visible) {
-      setShow(true);
+    if (!toast) return;
+
+    setShow(true);
+    fadeAnim.setValue(0);
+    translateY.setValue(-10);
+
+    Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
-        duration: 300,
+        duration: 250,
         useNativeDriver: true,
-      }).start();
+      }),
+      Animated.timing(translateY, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+    ]).start();
 
-      const timer = setTimeout(() => {
+    const timer = setTimeout(() => {
+      Animated.parallel([
         Animated.timing(fadeAnim, {
           toValue: 0,
-          duration: 300,
+          duration: 250,
           useNativeDriver: true,
-        }).start(() => setShow(false));
-      }, duration);
+        }),
+        Animated.timing(translateY, {
+          toValue: -10,
+          duration: 250,
+          useNativeDriver: true,
+        }),
+      ]).start(() => setShow(false));
+    }, duration);
 
-      return () => clearTimeout(timer);
-    }
-  }, [visible]);
+    return () => clearTimeout(timer);
+  }, [toast?.id]);
 
-  if (!show) return null;
+  if (!show || !toast) return null;
 
   const backgroundColor =
-    status === "success"
-      ? "#4CAF50"
-      : status === "error"
-      ? "#F44336"
-      : "#2196F3";
+    toast.status === "success"
+      ? "#2E7D32"
+      : toast.status === "error"
+      ? "#C62828"
+      : "#1565C0";
 
-  const iconColor =
-  status === "success"
-    ? "#0E5C15"   
-    : status === "error"
-    ? "#8B0000"   
-    : "#0A3D91";
-
+  const iconName =
+    toast.status === "success"
+      ? "checkmark"
+      : toast.status === "error"
+      ? "close"
+      : "information";
 
   return (
     <Animated.View
       style={[
         styles.toast,
-        { backgroundColor, opacity: fadeAnim },
-        extraStyle,
+        {
+          backgroundColor,
+          opacity: fadeAnim,
+          transform: [{ translateY }],
+        },
       ]}
     >
-      <Ionicons name="information-circle" size={22} color={iconColor} />
-      <Text style={styles.text}>{value}</Text>
+      <View style={styles.iconWrapper}>
+        <Ionicons name={iconName} size={20} color="#fff" />
+      </View>
+
+      <Text style={styles.text} numberOfLines={3}>
+        {toast.text}
+      </Text>
     </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
-  toast: { position: "absolute", top: 20, right: 20, alignContent: "center", flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 16, paddingHorizontal: 24, borderRadius: 10, shadowColor: "#000", elevation: 3 },
-  text: { color: "#FFFFFF", fontWeight: "bold", textAlign: "center" },
+  toast: {
+    position: "absolute",
+    top: 30,
+    left: 16,
+    right: 16,
+
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+
+    shadowColor: "#000",
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+
+    elevation: 8,
+  },
+
+  iconWrapper: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(255,255,255,0.2)",
+  },
+
+  text: {
+    flex: 1,
+    color: "#fff",
+    fontSize: 15,
+    fontWeight: "600",
+    lineHeight: 20,
+  },
 });

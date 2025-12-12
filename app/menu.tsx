@@ -5,11 +5,19 @@ import ButtonApp from "@/components/ButtonApp";
 import LogoSaboresDelValle from "@/components/logos/LogoSaboresDelValle";
 
 import { subiendoPedidos } from "@/app/database";
+import ToastApp from "@/components/ToastApp";
 import { useLoading } from "@/context/loaderContext";
 import { useAuth } from "@/context/userContext";
+import { useState } from "react";
 
 // * PANTALLA DEL MENÚ PRINCIPAL * //
 export default function MenuScreen() {
+
+  const [toast, setToast] = useState<{
+    id: number;
+    text: string;
+    status: "success" | "error" | "info";
+  } | null>(null);
 
   const router = useRouter();
   const { setLoading, setLoadingText } = useLoading();
@@ -32,8 +40,10 @@ export default function MenuScreen() {
     setLoadingText("Recogiendo datos del ERP...");
     setLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    await subiendoPedidos();
+    const responsePedidos = await subiendoPedidos();
     setLoading(false);
+    if (responsePedidos) setToast({ id: 1, text: responsePedidos, status: "success" });
+    else setToast({ id: 1, text: "Error al sincronizar los pedidos", status: "error" });
   };
 
   // * Cerrar sesión * //
@@ -71,6 +81,7 @@ export default function MenuScreen() {
           pressedStyle={{ backgroundColor: '#ff9a9bff' }}
         />
       </View>
+      <ToastApp toast={toast} />
     </View>
   );
 }

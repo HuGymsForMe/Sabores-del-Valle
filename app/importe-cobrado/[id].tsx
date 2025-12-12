@@ -14,16 +14,21 @@ export default function ImporteCobradoScreen() {
   const [observaciones, setObservaciones] = useState<string>("");
   const [importe, setImporte] = useState<string>("0 €");
   const [pedido, setPedido] = useState<PedidoCargaTrabajoUI | null>(null);
-  const [showToast, setShowToast] = useState<boolean>(false);
-  const [textToast, setTextToast] = useState<string>("");
+  const [toast, setToast] = useState<{
+    id: number;
+    text: string;
+    status: "success" | "error" | "info";
+  } | null>(null);
 
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
 
   const handleTicket = () => {
-    setTextToast("Imprimiendo ticket...");
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
+    setToast({
+      id: Date.now(),
+      text: "Imprimiendo ticket...",
+      status: "info",
+    });
   }
 
   const handleMarcarPedido = () => {
@@ -37,7 +42,6 @@ export default function ImporteCobradoScreen() {
 
   const comprobarMetodoDePago = (metodoPago: string | undefined) => {
     if (!metodoPago) return "💸";
-
     if (metodoPago === "Bizum") return "📱";
     if (metodoPago === "Tarjeta") return "💳";
     return "💸";
@@ -132,9 +136,7 @@ export default function ImporteCobradoScreen() {
         </View>
       </View>
       <ToastApp
-        visible={showToast}
-        value={textToast}
-        status="success"
+        toast={toast}
       />
     </View>
   );
