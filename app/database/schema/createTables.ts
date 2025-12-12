@@ -1,11 +1,12 @@
 import { getDB } from "@/app/database/db";
+import * as SQLite from "expo-sqlite";
 
 export async function createTables() {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   await db.execAsync(`
-    DROP TABLE IF EXISTS ls_lineas_pedido;
-    DROP TABLE IF EXISTS ls_pedido;
+    -- DROP TABLE IF EXISTS ls_lineas_pedido;
+    -- DROP TABLE IF EXISTS ls_pedido;
 
     CREATE TABLE IF NOT EXISTS ls_pedido (
       codigoCliente TEXT,

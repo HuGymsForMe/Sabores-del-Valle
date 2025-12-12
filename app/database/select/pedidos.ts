@@ -1,5 +1,6 @@
 import { getDB } from "@/app/database/db";
 import { CierreDeCajaRowUI, ConteoEstadoPedidosPorDiaCajaRowUI, ConteoEstadoPedidosPorDiaRowUI, PedidoCargaTrabajoRow, PedidoCargaTrabajoUI, PedidoDetallesPedidoRow, PedidoDetallesPedidoUI, PedidoImporteCobradoRow } from "@/app/database/types";
+import * as SQLite from "expo-sqlite";
 
 const estadoDocumentoMap: Record<number, string> = {
   1: "PENDIENTE",
@@ -9,7 +10,7 @@ const estadoDocumentoMap: Record<number, string> = {
 };
 
 export async function getPedidosCargaTrabajo(fechaISO: string): Promise<PedidoCargaTrabajoUI[]> {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   const query = `
     SELECT 
@@ -39,7 +40,7 @@ export async function getPedidosCargaTrabajo(fechaISO: string): Promise<PedidoCa
 }
 
 export async function getPedidosImporteCobrado(entradaDocumento: number): Promise<PedidoCargaTrabajoUI[]> {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   const query = `
     SELECT 
@@ -68,7 +69,7 @@ export async function getPedidosImporteCobrado(entradaDocumento: number): Promis
 export async function getPedidosDetallesPedido(
   entradaDocumento: number
 ): Promise<PedidoDetallesPedidoUI[]> {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   const query = `
     SELECT 
@@ -115,7 +116,7 @@ export async function getPedidosDetallesPedido(
 
 
 export async function getResumenPedidosPorEstado(fechaISO: string): Promise<ConteoEstadoPedidosPorDiaRowUI[]> {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   const query = `
     SELECT
@@ -149,7 +150,7 @@ export async function getResumenPedidosPorEstado(fechaISO: string): Promise<Cont
 }
 
 export async function getImporteTotalDiario(fecha: string): Promise<CierreDeCajaRowUI> {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   const query = `
     SELECT 
@@ -192,7 +193,7 @@ export async function getImporteTotalDiario(fecha: string): Promise<CierreDeCaja
 
 
 export async function getDiarioPorEstadoCaja(fecha: string): Promise<ConteoEstadoPedidosPorDiaCajaRowUI> {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   const query = `
     SELECT

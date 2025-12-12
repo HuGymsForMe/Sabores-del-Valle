@@ -1,8 +1,9 @@
 import { getDB } from "@/app/database/db";
 import { pedidosData } from "@/app/database/pedidos";
+import * as SQLite from "expo-sqlite";
 
 export async function insertPedido(pedido: any) {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   await db.runAsync(
     `
@@ -78,21 +79,28 @@ export async function insertPedido(pedido: any) {
 }
 
 export async function subiendoPedidos() {
-  const db = await getDB();
-  const row = await db.getFirstAsync<{ c: number }>(
-    `SELECT COUNT(*) as c FROM ls_pedido`
-  );
+  const db: SQLite.SQLiteDatabase = await getDB();
+  try {
+    const row = await db.getFirstAsync<{ c: number }>(
+      `SELECT COUNT(*) as c FROM ls_pedido`
+    );
 
-  if (row?.c && row.c > 0) {
-    console.log("ℹ️ Seed omitido (ya hay pedidos)");
-    return;
+    if (row?.c && row.c > 0) {
+      console.log("ℹ️ Seed omitido (ya hay pedidos)");
+      return;
+    }
+
+    console.log(`📦 Insertando ${pedidosData.length} pedidos...`);
+
+    for (const pedido of pedidosData) {
+      await insertPedido(pedido);
+    }
+
+    return `Se han insertado ${pedidosData.length} pedidos insertados correctamente`;
+
+  } catch (error) {
+    console.error("Error subiendo pedidos:", error);
+    return false;
   }
 
-  console.log(`📦 Insertando ${pedidosData.length} pedidos...`);
-
-  for (const pedido of pedidosData) {
-    await insertPedido(pedido);
-  }
-
-  console.log(`✅ Seed completado: ${pedidosData.length} pedidos insertados correctamente`);
 }

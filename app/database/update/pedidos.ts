@@ -1,4 +1,5 @@
 import { getDB } from "@/app/database/db";
+import * as SQLite from "expo-sqlite";
 
 export async function updateIncidenciaPedido(
   entradaDocumento: number,
@@ -6,7 +7,7 @@ export async function updateIncidenciaPedido(
   estado: number,
   incidencia: number | null = null
 ) {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   try {
     await db.runAsync(
@@ -26,7 +27,7 @@ export async function updateIncidenciaPedido(
 }
 
 export async function updateEstadoPedido(entradaDocumento: number, dniReceptor: string, nombreReceptor: string, observacionesReceptor: string) {
-  const db = await getDB();
+  const db: SQLite.SQLiteDatabase = await getDB();
 
   try {
     const lineas = await db.getAllAsync(
